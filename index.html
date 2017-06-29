@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8' />
+  <title></title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='mapbox-gl-js/dist/mapbox-gl-dev.js'></script>
+  <link href='mapbox-gl-js/dist/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='map'></div>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiM2NsMXA1ZTciLCJhIjoiY2lnYjNxNG1tMDUycHZ4bTd1cWpwdTl4eSJ9.p77S8zTz9qJbnEb_lHo84Q';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v10',
+      pitch: 45,
+      center: [37.540043, 55.747768],
+      zoom: 15
+    });
+    // 55.748116, 37.533486
+    // 55.748149, 37.534210
+    // 55.748415, 37.534801
+    // 55.748548, 37.535787
+    // 55.749273, 37.536270
+
+    // 55.749967, 37.537032
+    // 55.749327, 37.538019
+    // 55.749907, 37.538770
+    // 55.750831, 37.538641
+    // 55.751127, 37.540057
+    // 55.752353, 37.544273
+
+    // Create a GeoJSON source with an empty lineString.
+    var geojson = {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          properties: {
+            heights: [
+              // [
+              //   10.0,
+              //   20.0,
+              //   30.0,
+              //   250.0,
+              //   100.0,
+              //   85.0,
+              //   85.0,
+              //   320.0,
+              //   280.0,
+              //   280.0,
+              //   0.0
+              // ]
+              [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+              ]
+            ]
+          },
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [37.533486, 55.748116],
+              [37.534210, 55.748149],
+              [37.534801, 55.748415],
+              [37.535787, 55.748548],
+              [37.536270, 55.749273],
+              [37.537032, 55.749967],
+              [37.538019, 55.749327],
+              [37.538770, 55.749907],
+              [37.538641, 55.750831],
+              [37.540057, 55.751127],
+              [37.544273, 55.752353]
+            ]
+          }
+        }
+      ]
+    };
+
+    map.on('load', function () {
+
+      map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 1,
+        'paint': {
+          'fill-extrusion-color': '#aaa',
+          'fill-extrusion-height': {
+            'type': 'identity',
+            'property': 'height'
+          },
+          'fill-extrusion-base': {
+            'type': 'identity',
+            'property': 'min_height'
+          },
+          'fill-extrusion-opacity': .6
+        }
+      });
+
+      // add the line which will be modified in the animation
+      map.addLayer({
+        'id': 'line-animation',
+        'type': 'dline',
+        'source': {
+          'type': 'geojson',
+          'data': geojson
+        },
+        'layout': {
+          'dline-cap': 'round',
+          'dline-join': 'round'
+        },
+        'paint': {
+          'dline-color': '#ed6498',
+          'dline-width': 5,
+          'dline-opacity': .8
+        }
+      });
+      // map.getSource('line-animation').setData(geojson);
+
+    });
+  </script>
+
+</body>
+
+</html>
