@@ -5,8 +5,8 @@
   <meta charset='utf-8' />
   <title></title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  <script src='mapbox-gl-js/dist/mapbox-gl-dev.js'></script>
-  <link href='mapbox-gl-js/dist/mapbox-gl.css' rel='stylesheet' />
+  <script src='dist/mapbox-gl-dev.js'></script>
+  <link href='dist/mapbox-gl.css' rel='stylesheet' />
   <style>
     body {
       margin: 0;
@@ -127,7 +127,7 @@
 
       // add the line which will be modified in the animation
       map.addLayer({
-        'id': 'line-animation',
+        'id': 'dline-3d',
         'type': 'dline',
         'source': {
           'type': 'geojson',

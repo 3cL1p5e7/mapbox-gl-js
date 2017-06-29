@@ -347,6 +347,7 @@ const subclasses = {
     'fill': require('./style_layer/fill_style_layer'),
     'fill-extrusion': require('./style_layer/fill_extrusion_style_layer'),
     'line': require('./style_layer/line_style_layer'),
+    'dline': require('./style_layer/dline_style_layer'),
     'symbol': require('./style_layer/symbol_style_layer')
 };
 

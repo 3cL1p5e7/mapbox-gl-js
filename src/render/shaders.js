@@ -62,6 +62,18 @@ module.exports = {
         fragmentSource: fs.readFileSync(__dirname + '/../shaders/line_sdf.fragment.glsl', 'utf8'),
         vertexSource: fs.readFileSync(__dirname + '/../shaders/line_sdf.vertex.glsl', 'utf8')
     },
+    dline: {
+        fragmentSource: fs.readFileSync(__dirname + '/../shaders/dline.fragment.glsl', 'utf8'),
+        vertexSource: fs.readFileSync(__dirname + '/../shaders/dline.vertex.glsl', 'utf8')
+    },
+    dlinePattern: {
+        fragmentSource: fs.readFileSync(__dirname + '/../shaders/dline_pattern.fragment.glsl', 'utf8'),
+        vertexSource: fs.readFileSync(__dirname + '/../shaders/dline_pattern.vertex.glsl', 'utf8')
+    },
+    dlineSDF: {
+        fragmentSource: fs.readFileSync(__dirname + '/../shaders/dline_sdf.fragment.glsl', 'utf8'),
+        vertexSource: fs.readFileSync(__dirname + '/../shaders/dline_sdf.vertex.glsl', 'utf8')
+    },
     raster: {
         fragmentSource: fs.readFileSync(__dirname + '/../shaders/raster.fragment.glsl', 'utf8'),
         vertexSource: fs.readFileSync(__dirname + '/../shaders/raster.vertex.glsl', 'utf8')

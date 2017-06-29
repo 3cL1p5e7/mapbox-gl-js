@@ -124,6 +124,12 @@ class FeatureIndex {
                 const offset = this.getPaintValue('line-offset', styleLayer);
                 const translate = this.getPaintValue('line-translate', styleLayer);
                 styleLayerDistance = width / 2 + Math.abs(offset) + translateDistance(translate);
+            } else if (styleLayer.type === 'dline') {
+                const width = getLineWidth(this.getPaintValue('dline-width', styleLayer),
+                    this.getPaintValue('dline-gap-width', styleLayer));
+                const offset = this.getPaintValue('dline-offset', styleLayer);
+                const translate = this.getPaintValue('dline-translate', styleLayer);
+                styleLayerDistance = width / 2 + Math.abs(offset) + translateDistance(translate);
             } else if (styleLayer.type === 'fill') {
                 styleLayerDistance = translateDistance(this.getPaintValue('fill-translate', styleLayer));
             } else if (styleLayer.type === 'fill-extrusion') {
@@ -213,6 +219,20 @@ class FeatureIndex {
                             this.getPaintValue('line-width', styleLayer, feature),
                             this.getPaintValue('line-gap-width', styleLayer, feature));
                         const lineOffset = this.getPaintValue('line-offset', styleLayer, feature);
+                        if (lineOffset) {
+                            geometry = offsetLine(geometry, lineOffset * pixelsToTileUnits);
+                        }
+                        if (!multiPolygonIntersectsBufferedMultiLine(translatedPolygon, geometry, halfWidth)) continue;
+
+                    } else if (styleLayer.type === 'dline') {
+                        translatedPolygon = translate(queryGeometry,
+                            this.getPaintValue('dline-translate', styleLayer, feature),
+                            this.getPaintValue('dline-translate-anchor', styleLayer, feature),
+                            bearing, pixelsToTileUnits);
+                        const halfWidth = pixelsToTileUnits / 2 * getLineWidth(
+                            this.getPaintValue('dline-width', styleLayer, feature),
+                            this.getPaintValue('dline-gap-width', styleLayer, feature));
+                        const lineOffset = this.getPaintValue('dline-offset', styleLayer, feature);
                         if (lineOffset) {
                             geometry = offsetLine(geometry, lineOffset * pixelsToTileUnits);
                         }

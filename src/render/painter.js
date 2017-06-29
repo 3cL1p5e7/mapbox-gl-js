@@ -19,6 +19,7 @@ const draw = {
     symbol: require('./draw_symbol'),
     circle: require('./draw_circle'),
     line: require('./draw_line'),
+    dline: require('./draw_dline'),
     fill: require('./draw_fill'),
     'fill-extrusion': require('./draw_fill_extrusion'),
     raster: require('./draw_raster'),
